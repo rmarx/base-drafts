@@ -815,6 +815,10 @@ set of secrets.  The key derived using the "pn" label is used to protect the
 packet number from casual observation.  The packet number protection algorithm
 depends on the negotiated AEAD.
 
+Packet number protection keys are derived from the traffic secret in the same
+way that the key and IV are derived.  However, new packet number protection keys
+are not created when a key update (see {{key-update}}) is performed.
+
 Packet number protection is applied after packet protection is applied (see
 {{aead}}).  The ciphertext of the packet is sampled and used as input to an
 encryption algorithm.
@@ -992,6 +996,8 @@ what it is expecting.  It creates a new secret (see Section 7.2 of {{!TLS13}})
 and the corresponding read key and IV using the same variation on HKDF as
 defined in {{protection-keys}}; that is, the prefix "quic " is used in place of
 "tls13 ".
+
+Packet number protection keys are not changed during a key update.
 
 If the packet can be decrypted and authenticated using the updated key and IV,
 then the keys the endpoint uses for packet protection are also updated.  The
