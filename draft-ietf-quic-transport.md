@@ -4615,6 +4615,9 @@ Token:
 
 : An opaque blob that the client may use with a future Initial packet.
 
+A client MUST NOT send a NEW_TOKEN frame.  A server MUST treat receipt of a
+NEW_TOKEN frame as a connection error of type PROTOCOL_VIOLATION.
+
 
 ## STREAM Frames {#frame-stream}
 
